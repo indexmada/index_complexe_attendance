@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="take_picture_view" model="ir.ui.view">
+        <field name="name">hr.attendance.image</field>
+        <field name="model">hr.attendance.image</field>
+        <field name="arch" type="xml">
+            <form string="Image">
+                <separator string="Image"/>
+                <group col="4">
+                    <field name="image_attendance" widget="image"/>
+                </group>
+                <footer>
+                    <button name="save_pic" string="Valider" type="object"
+                             default_focus="1" class="oe_highlight"/>
+                    <button string="Cancel" class="btn btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="hr_attendance_action_take_picture" model="ir.actions.act_window">
+        <field name="name">Take picture</field>
+        <field name="res_model">hr.attendance.image</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="take_picture_view"/>
+    </record>
+    
+
+<!--     <menuitem id="menu_hr_attendance_my_attendances_new" name="Pointage" parent="hr_attendance.menu_hr_attendance_root" sequence="9" groups="hr_attendance.group_hr_attendance" action="hr_attendance_action_take_picture"/> -->
+</odoo>
