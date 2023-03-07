@@ -13,7 +13,7 @@
     "license": "LGPL-3",
     "data": [
         "views/assets.xml",
-        "views/views.xml",
+        "views/hrAttendance.xml",
     ],
     "depends": [
         "base",

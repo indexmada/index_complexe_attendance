@@ -3,6 +3,11 @@
 from odoo import models, fields, api
 from datetime import datetime
 
+class HrAttendance(models.Model):
+    _inherit="hr.attendance"
+
+    custom_attendance_image = fields.Binary("Photo")
+
 
 class HrEmployee(models.Model):
     _inherit = "hr.employee"
@@ -16,10 +21,12 @@ class HrEmployee(models.Model):
             res = employee_id.attendance_manual(next_action)
             print('*'*100)
             try:
-                attendance = res['action']['attendance']
+                attendance_id = int(res['action']['attendance']['id'])
+                attendance = self.env['hr.attendance'].sudo().browse(attendance_id)
+                attendance.sudo().write({"custom_attendance_image": param.get('image_attendance')})
                 print(attendance)
             except:
-                print('Nooo')
+                {'warning': 'Ooops! Désolé, nous avons rencontré un problème!'}
 
             return res
         else:

@@ -6,7 +6,7 @@
         <xpath expr=".">
             <script type="text/javascript" src="/index_complexe_attendance/static/src/lib/webcam.js"/>
             <script type="text/javascript" src="/index_complexe_attendance/static/src/js/webcam_widget.js"/>
-            <link rel="stylesheet" href="/index_complexe_attendance/static/src/css/index_complexe_attendance.css"/>
+            <link rel="stylesheet" href="/index_complexe_attendance/static/src/css/web_widget_image_webcam.css"/>
             <script type="text/javascript" src="/index_complexe_attendance/static/src/js/kiosk_confirm.js"/>
         </xpath>
     </template>
