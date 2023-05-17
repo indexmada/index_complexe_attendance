@@ -14,6 +14,9 @@
     "data": [
         "views/assets.xml",
         "views/hrAttendance.xml",
+        "views/res_company.xml",
+        "views/cron.xml",
+        "views/email_template.xml"
     ],
     "depends": [
         "base",
