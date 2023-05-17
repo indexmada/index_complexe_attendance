@@ -15,6 +15,11 @@
                             <field name="all_the"/>
                         </group>
         			</group>
+                    <group>
+                        <group>
+                            <field name="enable_webcam"/>
+                        </group>
+                    </group>
         		</page>
         	</xpath>
         </field>

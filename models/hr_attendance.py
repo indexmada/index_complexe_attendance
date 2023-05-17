@@ -255,3 +255,6 @@ class HrEmployee(models.Model):
             return res
         else:
             return {'warning': 'Ooops! Désolé, nous avons rencontré un problème!'}
+
+    def check_webcam_enabled(self):
+        return self.env.company.enable_webcam

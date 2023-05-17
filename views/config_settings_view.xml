@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="5"/>
+        <field name="inherit_id" ref="hr_attendance.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//h2" position="before">
+                <h2>Webcam</h2>
+                <div class="row mt16 o_settings_container">
+                    <div class="col-12 col-lg-6 o_setting_box" title="Webcam">
+                        <div class="o_setting_left_pane">
+                            <field name="enable_webcam"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <span class="o_form_label">Webcam</span>
+                            <div class="text-muted">
+                                Prendre une photo avec webcam pendant le pointage
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

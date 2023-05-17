@@ -1,1 +1,1 @@
-from . import ir_config_parameter,hr_attendance,res_company
+from . import ir_config_parameter,hr_attendance,res_company, config_settings

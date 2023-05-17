@@ -16,7 +16,8 @@
         "views/hrAttendance.xml",
         "views/res_company.xml",
         "views/cron.xml",
-        "views/email_template.xml"
+        "views/email_template.xml",
+        "views/config_settings_view.xml",
     ],
     "depends": [
         "base",
