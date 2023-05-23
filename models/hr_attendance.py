@@ -143,6 +143,21 @@ class HrAttendance(models.Model):
             "bold": True,
             "color": "red",
         })
+        cell_center_bol_green_11 = workbook.add_format({
+            'align': 'center',
+            'valign': 'vcenter',
+            'top': 1,
+            'left': 1,
+            'right': 1,
+            'bottom': 1,
+            'right_color': 'black',
+            'bottom_color': 'black',
+            'top_color': 'black',
+            'left_color': 'black',
+            "font_size": 11,
+            "bold": True,
+            "color": "green",
+        })
 
         cell_bold_center_11 = workbook.add_format({
             'align': 'center',
@@ -179,6 +194,8 @@ class HrAttendance(models.Model):
             worksheet_ost.write('C3','Heure Entrée',cell_bold_center_11)
             worksheet_ost.write('D3','Heure Sortie',cell_bold_center_11)
             worksheet_ost.write('E3','Heure Total',cell_bold_center_11)      
+
+            hr_leave_ids = self.env['hr.leave'].sudo().search([('date_from', '<=', current_date), ('date_to', '>=', current_date), ('state', '=', 'validate')])
 
             attendance_ids = self.search([]).filtered(lambda att: att.check_in.date() == current_date)
             row = 4
@@ -222,7 +239,10 @@ class HrAttendance(models.Model):
                     cell = 'D'+str(row)
                     worksheet_ost.write(cell, '',cell_center_11)
                     cell = 'E'+str(row)
-                    worksheet_ost.write(cell,'ABSENT', cell_center_bol_red_11)
+                    if employee in hr_leave_ids.mapped('employee_id'):
+                        worksheet_ost.write(cell,'CONGÉ', cell_center_bol_green_11)
+                    else:
+                        worksheet_ost.write(cell,'ABSENT', cell_center_bol_red_11)
                     row += 1
 
             current_date = current_date + timedelta(days=1)
