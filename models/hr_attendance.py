@@ -66,7 +66,7 @@ class HrAttendance(models.Model):
 
         for user in x_attendance_user:
             template_values = {
-                'email_from': 'pounasatu@gmail.com',
+                'email_from': None,
                 'email_to': user.email,
                 'email_cc': False,
                 'auto_delete': True,
@@ -102,6 +102,20 @@ class HrAttendance(models.Model):
         cell_center_11 = workbook.add_format({
             'align': 'center',
             'valign': 'vcenter',
+            'top': 1,
+            'left': 1,
+            'right': 1,
+            'bottom': 1,
+            'right_color': 'black',
+            'bottom_color': 'black',
+            'top_color': 'black',
+            'left_color': 'black',
+            "font_size": 11,
+            "bold": False,
+        })
+        cell_left_11 = workbook.add_format({
+            'align': 'left',
+            'valign': 'vleft',
             'top': 1,
             'left': 1,
             'right': 1,
@@ -187,7 +201,7 @@ class HrAttendance(models.Model):
                 cell = 'A'+str(row)
                 worksheet_ost.write(cell, date_att, cell_center_11)
                 cell = 'B'+str(row)
-                worksheet_ost.write(cell, attendance.employee_id.name, cell_center_11)
+                worksheet_ost.write(cell, attendance.employee_id.name, cell_left_11)
                 cell = 'C'+str(row)
                 worksheet_ost.write(cell,check_in.strftime("%H:%M:%S"), cell_center_11)
                 cell = 'D'+str(row)
@@ -202,7 +216,7 @@ class HrAttendance(models.Model):
                     cell = 'A'+str(row)
                     worksheet_ost.write(cell, date_att, cell_center_11)
                     cell = 'B'+str(row)
-                    worksheet_ost.write(cell, employee.name, cell_center_11)
+                    worksheet_ost.write(cell, employee.name, cell_left_11)
                     cell = 'C'+str(row)
                     worksheet_ost.write(cell,'', cell_center_11)
                     cell = 'D'+str(row)
