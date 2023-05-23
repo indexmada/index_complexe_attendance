@@ -174,8 +174,14 @@ class HrAttendance(models.Model):
 
                 check_in = attendance.check_in
                 check_out = attendance.check_out
-                total = check_out - check_in
-                total_formated = self.format_total_time(total)
+                if check_out:
+                    total = check_out - check_in
+                    total_formated = self.format_total_time(total)
+                    check_out = check_out.strftime("%H:%M:%S")
+                else:
+                    check_out = 'Non pointé'
+                    total_formated = '0'
+
                 date_att = str(check_in.day) +' '+MONTHS_LIST[check_in.month]+' '+str(check_in.year)
 
                 cell = 'A'+str(row)
@@ -185,7 +191,7 @@ class HrAttendance(models.Model):
                 cell = 'C'+str(row)
                 worksheet_ost.write(cell,check_in.strftime("%H:%M:%S"), cell_center_11)
                 cell = 'D'+str(row)
-                worksheet_ost.write(cell, check_out.strftime("%H:%M:%S"),cell_center_11)
+                worksheet_ost.write(cell, check_out,cell_center_11)
                 cell = 'E'+str(row)
                 worksheet_ost.write(cell,total_formated, cell_center_11)
                 row += 1
