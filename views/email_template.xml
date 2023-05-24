@@ -38,7 +38,7 @@
                     <div>
                         Bonjour ${ctx.get('user_name')}, <br/><br/>
 
-                        Voici le récap de la présence de ${ctx.get('day_week')}
+                       Merci de trouver en PJ le récap de la présence de ${user.company_id.name} de ${ctx.get('day_week')}
 
                         <br/>
                     </div>

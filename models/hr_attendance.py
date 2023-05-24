@@ -64,9 +64,11 @@ class HrAttendance(models.Model):
         generated_file = self.env['ir.attachment'].create(attachment_data)
         # End Generate xlsx file
 
+        email_from = self.env.company.name
+
         for user in x_attendance_user:
             template_values = {
-                'email_from': None,
+                'email_from': email_from,
                 'email_to': user.email,
                 'email_cc': False,
                 'auto_delete': True,
@@ -86,7 +88,7 @@ class HrAttendance(models.Model):
                 'day_week': day_week
             }
             with self.env.cr.savepoint():
-                email_template.with_context(context).send_mail(user.id, force_send=True, raise_exception=True)
+                email_template.with_context(context).send_mail(user.id, force_send=False, raise_exception=True)
                 values = email_template.generate_email(user.id)
 
         return True
