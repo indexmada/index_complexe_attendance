@@ -88,7 +88,7 @@ class HrAttendance(models.Model):
                 'day_week': day_week
             }
             with self.env.cr.savepoint():
-                email_template.with_context(context).send_mail(user.id, force_send=False, raise_exception=True)
+                email_template.with_context(context).send_mail(user.id, force_send=True, raise_exception=True)
                 values = email_template.generate_email(user.id)
 
         return True
