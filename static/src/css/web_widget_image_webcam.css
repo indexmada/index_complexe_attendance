@@ -4,7 +4,7 @@
     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 */
 .o_form_view.o_form_editable .o_form_field_image .o_form_image_controls
-.o_form_binary_file_web_cam {
+.o_form_binary_file_web_cam_complexe {
     color: inherit;
 }
 .o_field_widget.o_field_image .o_form_image_controls > .fa {
@@ -31,13 +31,13 @@
     text-align: center;
 }
 
-.o_hr_attendance_kiosk_mode .o_form_binary_file_web_cam {
+.o_hr_attendance_kiosk_mode .o_form_binary_file_web_cam_complexe {
     cursor: pointer;
     margin: 0.1em 0 0.1em;
     padding: 0.15em 0.3em;
     border-radius: 0.1em;
 }
 
-.o_hr_attendance_kiosk_mode .o_form_binary_file_web_cam:hover {
+.o_hr_attendance_kiosk_mode .o_form_binary_file_web_cam_complexe:hover {
     color: #00A09D;
 }

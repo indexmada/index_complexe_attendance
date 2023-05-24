@@ -51,7 +51,7 @@ odoo.define('web_widget_image_webcam.webcam_widget', function(require) {
                 }
             });
 
-            self.$el.find('.o_form_binary_file_web_cam').off().on('click', function(){
+            self.$el.find('.o_form_binary_file_web_cam_complexe').off().on('click', function(){
                 // Init Webcam
                 var dialog = new Dialog(self, {
                     size: 'large',

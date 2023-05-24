@@ -28,7 +28,7 @@
         <t t-jquery=".o_hr_attendance_sign_in_out_icon.fa-sign-in" t-operation="replace">
             <!-- <span t-if="!checked_in"><button name="open_wizard_image" class="o_form_binary_file_web_cam">Click here to take picture</button></span> -->
 
-            <a class="fa fa-7x o_form_binary_file_web_cam fa-sign-in btn-secondary" t-if="!checked_in" aria-label="Sign in" title="Sign in"/>
+            <a class="fa fa-7x o_form_binary_file_web_cam_complexe fa-sign-in btn-secondary" t-if="!checked_in" aria-label="Sign in" title="Sign in"/>
         </t>
     </t>
 

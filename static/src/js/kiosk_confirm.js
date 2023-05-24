@@ -14,7 +14,7 @@ var time = require('web.time');
 var KioskConfirm = AbstractAction.extend({
     events: {
         "click .o_hr_attendance_back_button": function () { this.do_action(this.next_action, {clear_breadcrumbs: true}); },
-        "click .o_form_binary_file_web_cam":  _.debounce(function() {
+        "click .o_form_binary_file_web_cam_complexe":  _.debounce(function() {
             var self = this
             this._rpc({
                     model: 'hr.employee',
