@@ -64,7 +64,7 @@ class HrAttendance(models.Model):
         generated_file = self.env['ir.attachment'].create(attachment_data)
         # End Generate xlsx file
 
-        email_from = self.env.company.name
+        email_from = self.env.company.email
 
         for user in x_attendance_user:
             template_values = {
