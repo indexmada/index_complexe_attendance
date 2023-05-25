@@ -14,36 +14,8 @@ var time = require('web.time');
 var KioskConfirm = AbstractAction.extend({
     events: {
         "click .o_hr_attendance_back_button": function () { this.do_action(this.next_action, {clear_breadcrumbs: true}); },
-        "click .o_form_binary_file_web_cam_complexe":  _.debounce(function() {
-            var self = this
-            this._rpc({
-                    model: 'hr.employee',
-                    method: 'check_webcam_enabled',
-                    args: [[this.employee_id]],
-                })
-                .then(function(result) {
-                    if (result) {
-                        self.webcam_attendance();
-                    }
-                    else {
-                        var def = self._rpc({
-                                model: 'hr.employee',
-                                method: 'create_time_checkin_checkout_new',
-                                args: [[self.employee_id], self.next_action],
-                                kwargs: {
-                                    'image_attendance': '',
-                                },
-                            }).then(function(result) {
-                                if (result.action) {
-                                    self.do_action(result.action);
-                                } else if (result.warning) {
-                                    self.do_warn(result.warning);
-                                }
-                            });
-                    }
-                });
-        },
-         200, true),
+        "click .o_form_binary_file_web_cam_complexe":  _.debounce(function() {this.webcam_attendance();},
+        200, true),
         "click .o_hr_attendance_sign_in_out_icon": _.debounce(function () {
             var self = this;
             this._rpc({
