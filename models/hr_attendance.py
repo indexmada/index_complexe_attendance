@@ -230,8 +230,11 @@ class HrAttendance(models.Model):
 
                 cell = 'D'+str(row)
                 # check-out +3
-                out_splited = str(check_out).split(':')
-                check_out_inc = str(int(out_splited[0])+3)+':'+out_splited[1]+':'+out_splited[2]
+                if check_out != 'Non pointé':
+                    out_splited = str(check_out).split(':')
+                    check_out_inc = str(int(out_splited[0])+3)+':'+out_splited[1]+':'+out_splited[2]
+                else:
+                    check_out_inc = 'Non pointé'
                 worksheet_ost.write(cell, check_out_inc,cell_center_11)
                 cell = 'E'+str(row)
                 worksheet_ost.write(cell,total_formated, cell_center_11)
