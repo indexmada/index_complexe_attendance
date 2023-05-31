@@ -222,9 +222,17 @@ class HrAttendance(models.Model):
                 cell = 'B'+str(row)
                 worksheet_ost.write(cell, attendance.employee_id.name, cell_left_11)
                 cell = 'C'+str(row)
-                worksheet_ost.write(cell,check_in.strftime("%H:%M:%S"), cell_center_11)
+                # check-in +3
+                check_in = check_in.strftime("%H:%M:%S")
+                in_splited = str(check_in).split(':')
+                check_in_inc = str(int(in_splited[0])+3)+':'+in_splited[1]+':'+in_splited[2]
+                worksheet_ost.write(cell,check_in_inc, cell_center_11)
+
                 cell = 'D'+str(row)
-                worksheet_ost.write(cell, check_out,cell_center_11)
+                # check-out +3
+                out_splited = str(check_out).split(':')
+                check_out_inc = str(int(out_splited[0])+3)+':'+out_splited[1]+':'+out_splited[2]
+                worksheet_ost.write(cell, check_out_inc,cell_center_11)
                 cell = 'E'+str(row)
                 worksheet_ost.write(cell,total_formated, cell_center_11)
                 row += 1
