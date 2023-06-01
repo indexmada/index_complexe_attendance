@@ -7,7 +7,7 @@ import xlsxwriter as xlsxwriter
 
 from odoo import models, fields, api
 from datetime import datetime,date,timedelta
-
+import pytz
 import base64
 
 MONTHS_LIST = ['', 'Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août','Septembre', 'Octobre', 'Novembre', 'Décembre']
@@ -17,6 +17,15 @@ class HrAttendance(models.Model):
     _inherit="hr.attendance"
 
     custom_attendance_image = fields.Binary("Photo")
+
+    def get_time_in_local_timezone(self, time):
+        if time:
+            user_tz = self.env.user.tz or 'UTC'
+            user_tz_offset = fields.Datetime.context_timestamp(self, fields.Datetime.now()).utcoffset().total_seconds() / 3600
+            local_time = fields.Datetime.from_string(time).astimezone(pytz.timezone(user_tz))
+            local_time = local_time.replace(tzinfo=None) - timedelta(hours=user_tz_offset)
+            return local_time
+        return ''
 
     def get_interval_date(self):
         d_beg = date.today() 
@@ -210,7 +219,7 @@ class HrAttendance(models.Model):
                 if check_out:
                     total = check_out - check_in
                     total_formated = self.format_total_time(total)
-                    check_out = check_out.strftime("%H:%M:%S")
+                    # check_out = check_out.strftime("%H:%M:%S")
                 else:
                     check_out = 'Non pointé'
                     total_formated = '0'
@@ -223,16 +232,19 @@ class HrAttendance(models.Model):
                 worksheet_ost.write(cell, attendance.employee_id.name, cell_left_11)
                 cell = 'C'+str(row)
                 # check-in +3
-                check_in = check_in.strftime("%H:%M:%S")
-                in_splited = str(check_in).split(':')
-                check_in_inc = str(int(in_splited[0])+3)+':'+in_splited[1]+':'+in_splited[2]
+                check_in = self.get_time_in_local_timezone(check_in)
+                check_in_inc = check_in.strftime("%H:%M:%S")
+                # in_splited = str(check_in).split(':')
+                # check_in_inc = str(int(in_splited[0])+3)+':'+in_splited[1]+':'+in_splited[2]
                 worksheet_ost.write(cell,check_in_inc, cell_center_11)
 
                 cell = 'D'+str(row)
                 # check-out +3
                 if check_out != 'Non pointé':
-                    out_splited = str(check_out).split(':')
-                    check_out_inc = str(int(out_splited[0])+3)+':'+out_splited[1]+':'+out_splited[2]
+                    # out_splited = str(check_out).split(':')
+                    # check_out_inc = str(int(out_splited[0])+3)+':'+out_splited[1]+':'+out_splited[2]
+                    check_out = self.get_time_in_local_timezone(check_out)
+                    check_out_inc = check_out.strftime("%H:%M:%S")
                 else:
                     check_out_inc = 'Non pointé'
                 worksheet_ost.write(cell, check_out_inc,cell_center_11)
