@@ -18,11 +18,16 @@
         "views/cron.xml",
         "views/email_template.xml",
         "views/config_settings_view.xml",
+        'views/work_entry_type.xml',
+        'views/resource_calendar.xml',
     ],
     "depends": [
         "base",
         "web",
         "hr_attendance",
+        "hr_contract", 
+        "hr_work_entry",
+        "resource"
     ],
     "qweb": [
         "static/src/xml/web_widget_image_webcam.xml",
