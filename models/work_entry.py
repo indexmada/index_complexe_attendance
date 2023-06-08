@@ -8,3 +8,4 @@ class workEntryType(models.Model):
 
 	sunday_maj = fields.Boolean("Dimanche")
 	holiday_maj = fields.Boolean("Jours Fériés")
+	night_maj = fields.Boolean("Nuit")

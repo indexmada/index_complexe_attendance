@@ -10,6 +10,7 @@
             <group string="Majoration">
               <field name="sunday_maj"/>
               <field name="holiday_maj"/>
+              <field name="night_maj"/>
             </group>
           </group>
         </xpath>  
