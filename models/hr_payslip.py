@@ -34,7 +34,13 @@ class HrPayslip(models.Model):
 
     def _get_night_maj(self):
         calendar_id = self.employee_id.resource_calendar_id
-        paid_amount = self._get_contract_wage()
+        global_amount = self._get_contract_wage()
+        wage_type = self.contract_id.wage_type
+
+        if wage_type == 'monthly':
+            paid_amount = global_amount / 173.33
+        else:
+            paid_amount = global_amount
 
         night_we_type_id = self.env['hr.work.entry.type'].sudo().search([('night_maj', '=', True)], limit=1)
         res = False
@@ -59,7 +65,7 @@ class HrPayslip(models.Model):
                     'work_entry_type_id': night_we_type_id.id,
                     'number_of_days': '',
                     'number_of_hours': nb_hours,
-                    'amount': paid_amount *0.1,
+                    'amount': paid_amount *nb_hours,
             }
             res = attendance_line if nb_hours else False     
 
@@ -73,7 +79,14 @@ class HrPayslip(models.Model):
         global_leave_ids = calendar_id.global_leave_ids.filtered(lambda leave: leave.date_from.date().month == self.date_from.month)
         maj_leave = self.env['hr.work.entry.type'].sudo().search([('holiday_maj', '=', True)], limit=1)
         res = False
-        paid_amount = self._get_contract_wage()
+        global_amount = self._get_contract_wage()
+        wage_type = self.contract_id.wage_type
+
+        if wage_type == 'monthly':
+            paid_amount = global_amount / 173.33
+        else:
+            paid_amount = global_amount
+
         if global_leave_ids and maj_leave:
             nb_hours = 0
             for gl in global_leave_ids:
@@ -88,7 +101,7 @@ class HrPayslip(models.Model):
                     'work_entry_type_id': maj_leave.id,
                     'number_of_days': '',
                     'number_of_hours': nb_hours,
-                    'amount': paid_amount *0.1,
+                    'amount': paid_amount *nb_hours,
             }
             res = attendance_line if nb_hours else False
 
@@ -99,7 +112,15 @@ class HrPayslip(models.Model):
         # Temps de travail: resource.calendar
         calendar_id = self.employee_id.resource_calendar_id
         is_sunday_increased = calendar_id.attendance_ids.filtered(lambda at: at.work_entry_type_id)
-        paid_amount = self._get_contract_wage()
+        
+        global_amount = self._get_contract_wage()
+        wage_type = self.contract_id.wage_type
+
+        if wage_type == 'monthly':
+            paid_amount = global_amount / 173.33
+        else:
+            paid_amount = global_amount
+
 
         res = False
 
@@ -117,7 +138,7 @@ class HrPayslip(models.Model):
                     'work_entry_type_id': work_entry_type.id,
                     'number_of_days': '',
                     'number_of_hours': nb_hours,
-                    'amount': paid_amount *0.4,
+                    'amount': paid_amount *nb_hours,
                 }
                 res = attendance_line
 
